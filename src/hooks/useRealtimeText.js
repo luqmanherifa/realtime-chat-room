@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ref, onValue, set } from "firebase/database";
 import { db } from "../lib/firebase";
 
-export function useRealtimeText(path = "sharedText/value") {
+export function useRealtimeText(path) {
   const [text, setText] = useState("");
   const textRef = ref(db, path);
 
