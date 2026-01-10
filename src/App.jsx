@@ -2,6 +2,38 @@ import { useEffect, useState } from "react";
 import { ref, onValue, set, onDisconnect, get } from "firebase/database";
 import { db } from "./lib/firebase";
 
+const generateDeviceFingerprint = () => {
+  const canvas = document.createElement("canvas");
+  const ctx = canvas.getContext("2d");
+  ctx.textBaseline = "top";
+  ctx.font = "14px Arial";
+  ctx.fillText("fingerprint", 2, 2);
+  const canvasFingerprint = canvas.toDataURL().slice(-50);
+
+  const fingerprint = [
+    navigator.userAgent,
+    navigator.language,
+    screen.colorDepth,
+    screen.width,
+    screen.height,
+    new Date().getTimezoneOffset(),
+    canvasFingerprint,
+    navigator.hardwareConcurrency || "unknown",
+    navigator.platform,
+  ].join("|");
+
+  let hash = 0;
+  for (let i = 0; i < fingerprint.length; i++) {
+    const char = fingerprint.charCodeAt(i);
+    hash = (hash << 5) - hash + char;
+    hash = hash & hash;
+  }
+
+  return "device_" + Math.abs(hash).toString(36);
+};
+
+const DEVICE_ID = generateDeviceFingerprint();
+
 export default function App() {
   const [step, setStep] = useState("select");
   const [roomCode, setRoomCode] = useState("");
@@ -16,7 +48,7 @@ export default function App() {
     }
 
     const code = roomCode.trim();
-    const roomRef = ref(db, `rooms/${code}/info`);
+    const roomRef = ref(db, `rooms/${code}/room`);
 
     const snapshot = await get(roomRef);
     if (snapshot.exists()) {
@@ -52,7 +84,7 @@ export default function App() {
     }
 
     const code = roomCode.trim();
-    const roomRef = ref(db, `rooms/${code}/info`);
+    const roomRef = ref(db, `rooms/${code}/room`);
     const snapshot = await get(roomRef);
 
     if (!snapshot.exists()) {
@@ -342,7 +374,7 @@ function useChatRoom(username, roomCode) {
   const [allMessages, setAllMessages] = useState([]);
   const [myMessage, setMyMessage] = useState("");
 
-  const roomInfoRef = ref(db, `rooms/${roomCode}/info`);
+  const roomInfoRef = ref(db, `rooms/${roomCode}/room`);
   const fieldsRef = ref(db, `rooms/${roomCode}/fields`);
   const myFieldRef = ref(db, `rooms/${roomCode}/fields/${username}`);
 
@@ -387,6 +419,7 @@ function useChatRoom(username, roomCode) {
 
     set(memberRef, {
       name: username,
+      deviceId: DEVICE_ID,
       joinedAt: joinedAt,
     });
 
