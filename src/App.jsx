@@ -308,12 +308,23 @@ function ChatRoom({ username, roomCode }) {
         </div>
 
         <div className="bg-white p-6 rounded-2xl shadow-lg space-y-3">
-          <h2 className="font-semibold text-gray-700">Pesan Anda</h2>
+          <div className="flex items-center justify-between">
+            <h2 className="font-semibold text-gray-700">Pesan Anda</h2>
+            <span className="text-xs text-gray-500 italic">
+              Tekan Enter untuk hapus pesan
+            </span>
+          </div>
           <textarea
             value={myMessage}
             onChange={(e) => updateMyMessage(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" && !e.shiftKey) {
+                e.preventDefault();
+                updateMyMessage("");
+              }
+            }}
             className="w-full h-32 p-4 border-2 border-gray-200 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            placeholder="Ketik pesan Anda di sini..."
+            placeholder="Ketik pesan Anda di sini... (Enter untuk hapus, Shift+Enter untuk baris baru)"
           />
         </div>
 
