@@ -341,11 +341,15 @@ function useChatRoom(username, roomCode) {
   }, [roomCode]);
 
   useEffect(() => {
+    const memberRef = ref(db, `rooms/${roomCode}/members/${username}`);
+
+    set(memberRef, {
+      name: username,
+      joinedAt: Date.now(),
+    });
+
     set(myFieldRef, "").then(() => {
       onDisconnect(myFieldRef).remove();
-      console.log(
-        `✅ Auto-delete diatur untuk ${username} di room ${roomCode}`
-      );
     });
 
     const unsubscribe = onValue(myFieldRef, (snapshot) => {
