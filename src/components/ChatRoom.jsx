@@ -6,75 +6,85 @@ export default function ChatRoom({ username, roomCode }) {
     roomCode
   );
 
+  const myBubble = allMessages.find((m) => m.name === username);
+  const otherBubbles = allMessages.filter((m) => m.name !== username);
+
   return (
-    <main>
-      <div className="container">
-        <div className="card">
-          <div className="flex-between">
-            <div>
-              <h1>{roomInfo?.name || "Loading..."}</h1>
-              <p>
-                Logged in as: <span className="username">{username}</span>
-              </p>
-            </div>
-            <div>
-              <p className="text-small">Kode Room:</p>
-              <p className="room-code">{roomCode}</p>
+    <main className="h-full w-full flex flex-col bg-white">
+      <div className="h-16 px-4 flex items-center justify-between border-b border-gray-100">
+        <div>
+          <h1 className="text-base font-extrabold">
+            {roomInfo?.name || "Loading..."}
+          </h1>
+          <p className="text-xs text-gray-500">Anda: {username}</p>
+        </div>
+        <div className="text-right">
+          <p className="text-[10px] text-gray-400">Room</p>
+          <p className="text-xs font-bold text-blue-500">{roomCode}</p>
+        </div>
+      </div>
+
+      <div className="flex-1 overflow-y-auto px-4 py-4">
+        {myBubble && (
+          <div className="sticky top-2 z-10 flex justify-end mb-4">
+            <div className="max-w-[80%] bg-blue-500 text-white rounded-2xl rounded-tr-sm px-4 py-3 text-sm transition-colors">
+              <p className="text-[10px] opacity-80 mb-1">Anda</p>
+              {myBubble.text ? (
+                myBubble.text
+              ) : (
+                <span className="text-xs opacity-70">(mengetik...)</span>
+              )}
             </div>
           </div>
-        </div>
+        )}
 
-        <div className="card">
-          <div className="flex-between">
-            <h2>Pesan Anda</h2>
-            <span className="text-small">Tekan Enter untuk hapus</span>
-          </div>
-          <textarea
-            value={myMessage}
-            onChange={(e) => updateMyMessage(e.target.value)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" && !e.shiftKey) {
-                e.preventDefault();
-                updateMyMessage("");
-              }
-            }}
-            placeholder="Ketik pesan Anda di sini... (Enter untuk hapus, Shift+Enter untuk baris baru)"
-          />
-        </div>
-
-        <div className="card">
-          <h2>Semua Pesan ({allMessages.length})</h2>
-
-          {allMessages.length === 0 ? (
-            <p className="empty-state">Belum ada pesan...</p>
+        <div className="flex flex-col gap-3">
+          {otherBubbles.length === 0 ? (
+            <p className="text-center text-sm text-gray-400 mt-10">
+              Menunggu user lain bergabung…
+            </p>
           ) : (
-            <div>
-              {allMessages.map((msg) => (
-                <div
-                  key={msg.name}
-                  className={`message-box ${
-                    msg.name === username ? "own" : ""
-                  }`}
-                >
-                  <div className="message-header">
-                    <div
-                      className={`dot ${msg.name === username ? "own" : ""}`}
-                    />
-                    <span className="username">
-                      {msg.name}
-                      {msg.name === username && " (Anda)"}
-                    </span>
-                  </div>
-                  <p>
-                    {msg.text || (
-                      <span className="text-small">Belum ada pesan</span>
-                    )}
+            otherBubbles.map((msg, index) => (
+              <div key={index} className="flex justify-start">
+                <div className="max-w-[85%] bg-gray-100 text-gray-900 rounded-2xl rounded-tl-sm px-4 py-3 text-sm transition-colors">
+                  <p className="text-[10px] font-bold text-gray-500 mb-1">
+                    {msg.name}
                   </p>
+                  {msg.text ? (
+                    msg.text
+                  ) : (
+                    <span className="text-xs text-gray-400">(diam)</span>
+                  )}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))
           )}
         </div>
+      </div>
+
+      <div className="px-3 py-3 border-t border-gray-100 bg-white">
+        <textarea
+          value={myMessage}
+          onChange={(e) => updateMyMessage(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.shiftKey) {
+              e.preventDefault();
+              updateMyMessage("");
+            }
+          }}
+          placeholder="Ketik sesuatu…"
+          rows={1}
+          className="
+            w-full
+            resize-none
+            rounded-2xl
+            bg-gray-100
+            px-4 py-3
+            text-sm
+            focus:outline-none
+            focus:ring-2 focus:ring-blue-400
+          "
+        />
       </div>
     </main>
   );
