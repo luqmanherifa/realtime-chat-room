@@ -7,6 +7,16 @@ import CreateRoomScreen from "./components/CreateRoomScreen";
 import JoinRoomScreen from "./components/JoinRoomScreen";
 
 export default function App() {
+  return (
+    <div className="min-h-screen w-screen bg-white flex justify-center overflow-hidden">
+      <div className="w-full max-w-[430px] h-screen overflow-x-hidden">
+        <AppContent />
+      </div>
+    </div>
+  );
+}
+
+function AppContent() {
   const [step, setStep] = useState("select");
   const [roomCode, setRoomCode] = useState("");
   const [roomName, setRoomName] = useState("");
