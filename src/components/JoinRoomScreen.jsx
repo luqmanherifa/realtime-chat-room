@@ -51,7 +51,7 @@ export default function JoinRoomScreen({
               Kode Room
             </label>
             <input
-              className="w-full h-16 rounded-2xl border-2 border-gray-200 bg-white px-5 text-base font-medium text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-sage focus:ring-0 transition"
+              className="w-full h-16 rounded-2xl border-2 border-gray-200 bg-white px-5 text-base font-medium text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-echo focus:ring-0 transition"
               type="text"
               value={roomCode}
               onChange={(e) => setRoomCode(e.target.value)}
@@ -64,7 +64,7 @@ export default function JoinRoomScreen({
               Nama Anda
             </label>
             <input
-              className="w-full h-16 rounded-2xl border-2 border-gray-200 bg-white px-5 text-base font-medium text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-sage focus:ring-0 transition"
+              className="w-full h-16 rounded-2xl border-2 border-gray-200 bg-white px-5 text-base font-medium text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-echo focus:ring-0 transition"
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -77,7 +77,7 @@ export default function JoinRoomScreen({
         {/* Submit */}
         <button
           onClick={onSubmit}
-          className="mt-8 h-16 rounded-2xl bg-sage text-base font-bold uppercase tracking-wide text-white active:scale-98 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="mt-8 h-16 rounded-2xl bg-echo text-base font-bold uppercase tracking-wide text-white active:scale-98 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Gabung Room
         </button>

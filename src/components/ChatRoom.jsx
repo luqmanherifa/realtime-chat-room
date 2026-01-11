@@ -36,7 +36,7 @@ export default function ChatRoom({ username, roomCode }) {
                 </p>
                 <p className="text-sm font-bold text-gray-800">{username}</p>
               </div>
-              <div className="h-12 w-12 rounded-full bg-purp flex items-center justify-center text-white font-bold text-lg select-none">
+              <div className="h-12 w-12 rounded-full bg-whisper flex items-center justify-center text-white font-bold text-lg select-none">
                 {username?.charAt(0).toUpperCase()}
               </div>
             </div>
@@ -46,7 +46,7 @@ export default function ChatRoom({ username, roomCode }) {
           <div className="px-6 py-6 pb-8">
             {/* My Bubble */}
             <div className="sticky top-24 z-10 mb-6 flex justify-end">
-              <div className="w-[85%] bg-purp text-white rounded-2xl rounded-tr-md px-5 py-4">
+              <div className="w-[85%] bg-whisper text-white rounded-2xl rounded-tr-md px-5 py-4">
                 <div className="flex items-center justify-between mb-3">
                   <p className="text-xs font-bold opacity-90 uppercase tracking-wide">
                     Anda
@@ -108,7 +108,7 @@ export default function ChatRoom({ username, roomCode }) {
               ) : (
                 otherBubbles.map((msg, index) => (
                   <div key={index} className="flex justify-start">
-                    <div className="max-w-[85%] bg-sage text-white rounded-2xl rounded-tl-md px-5 py-4 transition-all">
+                    <div className="max-w-[85%] bg-echo text-white rounded-2xl rounded-tl-md px-5 py-4 transition-all">
                       <p className="text-xs font-bold opacity-90 uppercase tracking-wide mb-2">
                         {msg.name}
                       </p>

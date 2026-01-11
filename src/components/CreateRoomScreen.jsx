@@ -53,7 +53,7 @@ export default function CreateRoomScreen({
               Nama Room
             </label>
             <input
-              className="w-full h-16 rounded-2xl border-2 border-gray-200 bg-white px-5 text-base font-medium text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-purp focus:ring-0 transition"
+              className="w-full h-16 rounded-2xl border-2 border-gray-200 bg-white px-5 text-base font-medium text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-whisper focus:ring-0 transition"
               type="text"
               value={roomName}
               onChange={(e) => setRoomName(e.target.value)}
@@ -66,7 +66,7 @@ export default function CreateRoomScreen({
               Kode Room
             </label>
             <input
-              className="w-full h-16 rounded-2xl border-2 border-gray-200 bg-white px-5 text-base font-medium text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-purp focus:ring-0 transition"
+              className="w-full h-16 rounded-2xl border-2 border-gray-200 bg-white px-5 text-base font-medium text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-whisper focus:ring-0 transition"
               type="text"
               value={roomCode}
               onChange={(e) => setRoomCode(e.target.value)}
@@ -82,7 +82,7 @@ export default function CreateRoomScreen({
               Nama Anda
             </label>
             <input
-              className="w-full h-16 rounded-2xl border-2 border-gray-200 bg-white px-5 text-base font-medium text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-purp focus:ring-0 transition"
+              className="w-full h-16 rounded-2xl border-2 border-gray-200 bg-white px-5 text-base font-medium text-gray-800 placeholder:text-gray-400 focus:outline-none focus:border-whisper focus:ring-0 transition"
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -95,7 +95,7 @@ export default function CreateRoomScreen({
         {/* Submit */}
         <button
           onClick={onSubmit}
-          className="mt-8 h-16 rounded-2xl bg-purp text-base font-bold uppercase tracking-wide text-white active:scale-98 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="mt-8 h-16 rounded-2xl bg-whisper text-base font-bold uppercase tracking-wide text-white active:scale-98 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           Buat Room
         </button>

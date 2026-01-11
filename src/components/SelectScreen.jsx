@@ -3,7 +3,7 @@ export default function SelectScreen({ onCreateClick, onJoinClick }) {
     <main className="w-full h-screen flex flex-col justify-center items-center px-4 overflow-hidden">
       <div className="w-full max-w-md flex flex-col h-full justify-center">
         <div className="mb-10 text-center">
-          <h1 className="text-3xl font-heading tracking-wide text-navy">
+          <h1 className="text-3xl font-heading tracking-wide text-rumor">
             Rumorum
           </h1>
           <p className="mt-2 text-base text-gray-500">
@@ -14,13 +14,13 @@ export default function SelectScreen({ onCreateClick, onJoinClick }) {
         <div className="flex flex-col gap-4">
           <button
             onClick={onCreateClick}
-            className="h-24 rounded-2xl bg-purp active:scale-95 transition text-base font-bold uppercase tracking-wide text-white"
+            className="h-24 rounded-2xl bg-whisper active:scale-95 transition text-base font-bold uppercase tracking-wide text-white"
           >
             Buat Room
           </button>
           <button
             onClick={onJoinClick}
-            className="h-24 rounded-2xl bg-sage active:scale-95 transition text-base font-bold uppercase tracking-wide text-white"
+            className="h-24 rounded-2xl bg-echo active:scale-95 transition text-base font-bold uppercase tracking-wide text-white"
           >
             Gabung Room
           </button>
