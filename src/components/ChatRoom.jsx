@@ -1,4 +1,5 @@
 import { useChatRoom } from "../hooks/useChatRoom";
+import { useEffect, useRef } from "react";
 
 export default function ChatRoom({ username, roomCode }) {
   const { roomInfo, allMessages, myMessage, updateMyMessage } = useChatRoom(
@@ -7,12 +8,17 @@ export default function ChatRoom({ username, roomCode }) {
   );
   const myBubble = allMessages.find((m) => m.name === username);
   const otherBubbles = allMessages.filter((m) => m.name !== username);
+  const chatEndRef = useRef(null);
+
+  useEffect(() => {
+    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [otherBubbles.length]);
 
   return (
     <main className="h-screen w-full flex justify-center bg-white overflow-hidden">
-      <div className="w-full max-w-md h-screen flex flex-col relative">
+      <div className="w-full max-w-md h-screen flex flex-col">
         {/* Fixed Header */}
-        <div className="absolute top-0 left-0 right-0 h-20 px-4 flex items-center justify-between border-b border-gray-200 bg-white z-20">
+        <div className="h-20 px-4 flex items-center justify-between border-b border-gray-200 bg-white flex-shrink-0">
           <div className="flex flex-col leading-tight">
             <h1 className="text-base font-bold text-gray-700">
               {roomInfo?.name || "Loading..."}
@@ -34,9 +40,9 @@ export default function ChatRoom({ username, roomCode }) {
         </div>
 
         {/* Scrollable Chat Area */}
-        <div className="flex-1 overflow-y-auto px-4 py-4 mt-20 mb-24">
+        <div className="flex-1 overflow-y-auto px-4 py-4">
           {myBubble && (
-            <div className="sticky top-2 z-10 flex justify-end mb-4">
+            <div className="sticky top-0 z-10 flex justify-end mb-4 pt-2">
               <div className="max-w-[80%] bg-blue-500 text-white rounded-2xl rounded-tr-sm px-4 py-3 text-sm transition-colors">
                 <p className="text-[10px] opacity-80 mb-1">Anda</p>
                 {myBubble.text ? (
@@ -68,11 +74,12 @@ export default function ChatRoom({ username, roomCode }) {
                 </div>
               ))
             )}
+            <div ref={chatEndRef} />
           </div>
         </div>
 
-        {/* Fixed Input */}
-        <div className="absolute bottom-0 left-0 right-0 px-3 py-5 border-t border-gray-200 bg-white z-20">
+        {/* Non-Fixed Input */}
+        <div className="px-3 py-5 border-t border-gray-200 bg-white flex-shrink-0">
           <div className="flex items-center space-x-2">
             <textarea
               value={myMessage}
@@ -93,16 +100,16 @@ export default function ChatRoom({ username, roomCode }) {
               onClick={() => updateMyMessage("")}
               disabled={!myMessage}
               className={`
-        h-10 w-10
-        rounded-full
-        flex items-center justify-center
-        transition
-        ${
-          myMessage
-            ? "bg-blue-100 text-blue-500 hover:bg-blue-200 active:scale-95"
-            : "bg-gray-100 text-gray-400 cursor-not-allowed"
-        }
-      `}
+                h-10 w-10
+                rounded-full
+                flex items-center justify-center
+                transition
+                ${
+                  myMessage
+                    ? "bg-blue-100 text-blue-500 hover:bg-blue-200 active:scale-95"
+                    : "bg-gray-100 text-gray-400 cursor-not-allowed"
+                }
+              `}
               title="Reset teks"
             >
               <svg
