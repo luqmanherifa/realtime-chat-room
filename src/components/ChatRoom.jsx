@@ -15,12 +15,11 @@ export default function ChatRoom({ username, roomCode }) {
   }, [otherBubbles.length]);
 
   return (
-    <main className="h-screen w-full flex justify-center bg-white overflow-hidden">
+    <main className="h-screen w-full flex justify-center bg-white">
       <div className="w-full max-w-md h-screen flex flex-col">
-        {/* Scrollable Area: Header + Chat */}
-        <div className="flex-1 overflow-y-auto flex flex-col">
+        <div className="flex-1 min-h-0 overflow-y-auto">
           {/* Header */}
-          <div className="sticky top-0 h-20 px-4 flex items-center justify-between border-b border-gray-200 bg-white z-20 flex-shrink-0">
+          <div className="sticky top-0 h-20 px-4 flex items-center justify-between border-b border-gray-200 bg-white z-20">
             <div className="flex flex-col leading-tight">
               <h1 className="text-base font-bold text-gray-700">
                 {roomInfo?.name || "Loading..."}
@@ -46,7 +45,7 @@ export default function ChatRoom({ username, roomCode }) {
           {/* Chat Messages */}
           <div className="px-4 py-4">
             {myBubble && (
-              <div className="sticky top-20 z-10 flex justify-end mb-4 pt-2">
+              <div className="sticky top-20 z-10 flex justify-end mb-4">
                 <div className="max-w-[80%] bg-blue-500 text-white rounded-2xl rounded-tr-sm px-4 py-3 text-sm transition-colors">
                   <p className="text-[10px] opacity-80 mb-1">Anda</p>
                   {myBubble.text ? (
@@ -83,8 +82,8 @@ export default function ChatRoom({ username, roomCode }) {
           </div>
         </div>
 
-        {/* Fixed Input Area */}
-        <div className="px-3 py-5 border-t border-gray-200 bg-white flex-shrink-0">
+        {/* Input */}
+        <div className="px-3 py-5 border-t border-gray-200 bg-white">
           <div className="flex items-center space-x-2">
             <textarea
               value={myMessage}
