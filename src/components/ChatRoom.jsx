@@ -17,68 +17,73 @@ export default function ChatRoom({ username, roomCode }) {
   return (
     <main className="h-screen w-full flex justify-center bg-white overflow-hidden">
       <div className="w-full max-w-md h-screen flex flex-col">
-        {/* Fixed Header */}
-        <div className="h-20 px-4 flex items-center justify-between border-b border-gray-200 bg-white flex-shrink-0">
-          <div className="flex flex-col leading-tight">
-            <h1 className="text-base font-bold text-gray-700">
-              {roomInfo?.name || "Loading..."}
-            </h1>
-            <p className="text-[11px] text-gray-700">
-              Kode:{" "}
-              <span className="font-medium text-gray-700">{roomCode}</span>
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="flex flex-col text-right leading-tight">
-              <p className="text-[11px] text-gray-700">Anda</p>
-              <p className="text-xs font-semibold text-gray-700">{username}</p>
+        {/* Scrollable Area: Header + Chat */}
+        <div className="flex-1 overflow-y-auto flex flex-col">
+          {/* Header */}
+          <div className="sticky top-0 h-20 px-4 flex items-center justify-between border-b border-gray-200 bg-white z-20 flex-shrink-0">
+            <div className="flex flex-col leading-tight">
+              <h1 className="text-base font-bold text-gray-700">
+                {roomInfo?.name || "Loading..."}
+              </h1>
+              <p className="text-[11px] text-gray-700">
+                Kode:{" "}
+                <span className="font-medium text-gray-700">{roomCode}</span>
+              </p>
             </div>
-            <div className="h-9 w-9 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm select-none">
-              {username?.charAt(0).toUpperCase()}
-            </div>
-          </div>
-        </div>
-
-        {/* Scrollable Chat Area */}
-        <div className="flex-1 overflow-y-auto px-4 py-4">
-          {myBubble && (
-            <div className="sticky top-0 z-10 flex justify-end mb-4 pt-2">
-              <div className="max-w-[80%] bg-blue-500 text-white rounded-2xl rounded-tr-sm px-4 py-3 text-sm transition-colors">
-                <p className="text-[10px] opacity-80 mb-1">Anda</p>
-                {myBubble.text ? (
-                  myBubble.text
-                ) : (
-                  <span className="text-xs opacity-70">(mengetik...)</span>
-                )}
+            <div className="flex items-center gap-2">
+              <div className="flex flex-col text-right leading-tight">
+                <p className="text-[11px] text-gray-700">Anda</p>
+                <p className="text-xs font-semibold text-gray-700">
+                  {username}
+                </p>
+              </div>
+              <div className="h-9 w-9 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-sm select-none">
+                {username?.charAt(0).toUpperCase()}
               </div>
             </div>
-          )}
-          <div className="flex flex-col gap-3">
-            {otherBubbles.length === 0 ? (
-              <p className="text-center text-sm text-gray-500 mt-10">
-                Menunggu user lain bergabung…
-              </p>
-            ) : (
-              otherBubbles.map((msg, index) => (
-                <div key={index} className="flex justify-start">
-                  <div className="max-w-[85%] bg-gray-100 text-gray-700 rounded-2xl rounded-tl-sm px-4 py-3 text-sm transition-colors">
-                    <p className="text-[10px] font-bold text-gray-700 mb-1">
-                      {msg.name}
-                    </p>
-                    {msg.text ? (
-                      msg.text
-                    ) : (
-                      <span className="text-xs text-gray-700">(diam)</span>
-                    )}
-                  </div>
+          </div>
+
+          {/* Chat Messages */}
+          <div className="px-4 py-4">
+            {myBubble && (
+              <div className="sticky top-20 z-10 flex justify-end mb-4 pt-2">
+                <div className="max-w-[80%] bg-blue-500 text-white rounded-2xl rounded-tr-sm px-4 py-3 text-sm transition-colors">
+                  <p className="text-[10px] opacity-80 mb-1">Anda</p>
+                  {myBubble.text ? (
+                    myBubble.text
+                  ) : (
+                    <span className="text-xs opacity-70">(mengetik...)</span>
+                  )}
                 </div>
-              ))
+              </div>
             )}
-            <div ref={chatEndRef} />
+            <div className="flex flex-col gap-3">
+              {otherBubbles.length === 0 ? (
+                <p className="text-center text-sm text-gray-500 mt-10">
+                  Menunggu user lain bergabung…
+                </p>
+              ) : (
+                otherBubbles.map((msg, index) => (
+                  <div key={index} className="flex justify-start">
+                    <div className="max-w-[85%] bg-gray-100 text-gray-700 rounded-2xl rounded-tl-sm px-4 py-3 text-sm transition-colors">
+                      <p className="text-[10px] font-bold text-gray-700 mb-1">
+                        {msg.name}
+                      </p>
+                      {msg.text ? (
+                        msg.text
+                      ) : (
+                        <span className="text-xs text-gray-700">(diam)</span>
+                      )}
+                    </div>
+                  </div>
+                ))
+              )}
+              <div ref={chatEndRef} />
+            </div>
           </div>
         </div>
 
-        {/* Non-Fixed Input */}
+        {/* Fixed Input Area */}
         <div className="px-3 py-5 border-t border-gray-200 bg-white flex-shrink-0">
           <div className="flex items-center space-x-2">
             <textarea
