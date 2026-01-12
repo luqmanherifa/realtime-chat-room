@@ -1,1 +1,1 @@
-# rumorum-living-presence-room
+# living-presence-room
