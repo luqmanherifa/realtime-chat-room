@@ -46,9 +46,9 @@ export default function SelectScreen({ onCreateClick, onJoinClick }) {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="mb-12 text-center"
+          className="mb-8 text-center"
         >
-          <div className="mb-6 flex justify-center">
+          <div className="mb-2 flex justify-center">
             <motion.div
               animate={{
                 y: [0, -8, 0],
@@ -68,7 +68,7 @@ export default function SelectScreen({ onCreateClick, onJoinClick }) {
           </h1>
           <div className="flex items-center justify-center gap-1.5">
             <p className="text-sm text-slate-500 font-medium">
-              Ruang cerita yang lewat begitu saja
+              Ruang untuk cerita singkat
             </p>
             <button
               onClick={() => setShowModal(true)}
