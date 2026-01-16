@@ -72,59 +72,50 @@ export default function ChatRoom({ username, roomCode }) {
         <motion.div
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          className="bg-white border-b-2 border-slate-200"
+          className="relative bg-white border-b-2 border-slate-200 overflow-hidden"
         >
-          <div className="px-4 py-3">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-2 flex-1 min-w-0">
-                <motion.div
-                  animate={{ rotate: [0, 5, -5, 0] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                  className="flex-shrink-0"
-                >
-                  <RumorumLogoIcon className="w-7 h-7 fill-rumor" />
-                </motion.div>
-                <div className="flex-1 min-w-0">
-                  <h1 className="text-base font-bold text-slate-800 leading-tight truncate">
-                    {roomInfo?.name || "..."}
-                  </h1>
-                  <div className="flex items-center gap-1.5 text-[10px] text-slate-500 font-medium">
-                    <PeopleIcon className="w-2.5 h-2.5 fill-slate-500" />
-                    <span>{otherBubbles.length + 1} orang</span>
-                  </div>
+          <div className="relative px-4 py-2">
+            <div className="flex items-center gap-2.5">
+              <motion.div
+                animate={{
+                  rotate: [0, 5, -5, 0],
+                }}
+                transition={{ duration: 2, repeat: Infinity }}
+                className="flex-shrink-0"
+              >
+                <RumorumLogoIcon className="w-6 h-6 fill-rumor" />
+              </motion.div>
+
+              <div className="flex-1 min-w-0">
+                <h1 className="text-sm font-bold text-slate-800 leading-tight truncate mb-0.5">
+                  {roomInfo?.name || "..."}
+                </h1>
+                <div className="flex items-center gap-1 text-[10px] font-medium">
+                  <span className="text-slate-500">Kode:</span>
+                  <span className="font-bold text-slate-700 tracking-wider">
+                    {roomCode}
+                  </span>
+                  <motion.button
+                    whileTap={{ scale: 0.9 }}
+                    onClick={handleCopyCode}
+                    className="p-0.5 hover:bg-slate-100 rounded transition-colors"
+                    title="Salin kode"
+                  >
+                    {copied ? (
+                      <CheckIcon className="w-3 h-3 fill-green-600" />
+                    ) : (
+                      <CopyIcon className="w-3 h-3 fill-slate-500" />
+                    )}
+                  </motion.button>
                 </div>
               </div>
 
-              <div
-                className={`h-8 w-8 rounded-full ${getColorForUser(
-                  username
-                )} flex items-center justify-center text-white font-bold text-xs select-none flex-shrink-0`}
-              >
-                {getInitials(username)}
-              </div>
-            </div>
-
-            <div className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 flex items-center justify-between">
-              <div className="flex items-center gap-2 flex-1 min-w-0">
-                <span className="text-[10px] text-slate-500 font-semibold">
-                  Kode
-                </span>
-                <span className="text-xs font-bold text-slate-800 tracking-wider">
-                  {roomCode}
+              <div className="flex items-center gap-1.5 px-2.5 py-1 bg-blue-50 rounded-full border border-blue-200 flex-shrink-0">
+                <PeopleIcon className="w-3.5 h-3.5 fill-blue-500" />
+                <span className="text-sm font-bold text-slate-800">
+                  {otherBubbles.length + 1}
                 </span>
               </div>
-              <motion.button
-                whileTap={{ scale: 0.9 }}
-                onClick={handleCopyCode}
-                className="p-1 hover:bg-slate-200/60 rounded-md transition-colors flex-shrink-0"
-                title="Salin kode"
-              >
-                {copied ? (
-                  <CheckIcon className="w-3.5 h-3.5 fill-green-600" />
-                ) : (
-                  <CopyIcon className="w-3.5 h-3.5 fill-slate-500" />
-                )}
-              </motion.button>
             </div>
           </div>
         </motion.div>
@@ -137,13 +128,13 @@ export default function ChatRoom({ username, roomCode }) {
             animate={{ scale: 1, opacity: 1 }}
             className="sticky top-0 z-10"
           >
-            <div className="bg-white rounded-xl border-2 border-whisper/30 p-2.5">
+            <div className="bg-white rounded-xl border-2 border-whisper/30 p-2.5 pb-2">
               <div className="flex items-center justify-between mb-1.5">
                 <div className="flex items-center gap-1.5 flex-1 min-w-0">
                   <div
-                    className={`h-5 w-5 rounded-full ${getColorForUser(
+                    className={`h-4 w-4 rounded-full ${getColorForUser(
                       username
-                    )} flex items-center justify-center text-white font-bold text-[10px] select-none flex-shrink-0`}
+                    )} flex items-center justify-center text-white font-bold text-[9px] select-none flex-shrink-0`}
                   >
                     {getInitials(username)}
                   </div>
@@ -151,57 +142,26 @@ export default function ChatRoom({ username, roomCode }) {
                     {username}
                   </span>
                   <span className="text-[8px] text-slate-400 font-medium">
-                    • Enter untuk hapus
+                    • Enter hapus
                   </span>
                 </div>
-                <div className="flex items-center gap-1.5 flex-shrink-0">
-                  <motion.div
-                    animate={{ opacity: isTyping ? 1 : 0 }}
-                    className="flex items-center gap-1"
-                  >
-                    <div className="flex gap-0.5">
-                      <motion.div
-                        animate={{ scale: [1, 1.3, 1] }}
-                        transition={{ duration: 0.6, repeat: Infinity }}
-                        className="w-1 h-1 rounded-full bg-whisper"
-                      />
-                      <motion.div
-                        animate={{ scale: [1, 1.3, 1] }}
-                        transition={{
-                          duration: 0.6,
-                          delay: 0.2,
-                          repeat: Infinity,
-                        }}
-                        className="w-1 h-1 rounded-full bg-whisper"
-                      />
-                      <motion.div
-                        animate={{ scale: [1, 1.3, 1] }}
-                        transition={{
-                          duration: 0.6,
-                          delay: 0.4,
-                          repeat: Infinity,
-                        }}
-                        className="w-1 h-1 rounded-full bg-whisper"
-                      />
-                    </div>
-                  </motion.div>
+                <div className="flex items-center flex-shrink-0">
                   <motion.button
                     whileTap={{ scale: 0.9, rotate: 180 }}
                     type="button"
                     onClick={() => updateMyMessage("")}
                     disabled={!myMessage}
-                    className={`h-5 w-5 rounded-full flex items-center justify-center transition-all ${
+                    className={`h-4 w-4 rounded-full flex items-center justify-center transition-all ${
                       myMessage
                         ? "bg-whisper text-white hover:bg-whisper/80"
                         : "bg-slate-100 text-slate-300 cursor-not-allowed"
                     }`}
                     title="Reset"
                   >
-                    <ResetIcon className="h-2.5 w-2.5" />
+                    <ResetIcon className="h-2 w-2" />
                   </motion.button>
                 </div>
               </div>
-
               <textarea
                 value={myMessage}
                 onChange={(e) => updateMyMessage(e.target.value)}
@@ -212,8 +172,8 @@ export default function ChatRoom({ username, roomCode }) {
                   }
                 }}
                 placeholder="Ketik sesuatu..."
-                rows={2}
-                className="w-full resize-none bg-slate-50 text-slate-800 placeholder:text-slate-400 rounded-lg px-2.5 py-1.5 text-sm font-medium focus:outline-none focus:bg-slate-100 transition-colors border border-slate-200 focus:border-whisper"
+                rows={1}
+                className="w-full resize-none bg-slate-50 text-slate-800 placeholder:text-slate-400 rounded-lg px-2 py-1.5 text-xs font-medium focus:outline-none focus:bg-slate-100 transition-colors border border-slate-200 focus:border-whisper"
               />
             </div>
           </motion.div>
@@ -225,26 +185,26 @@ export default function ChatRoom({ username, roomCode }) {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0 }}
-                className="text-center py-12"
+                className="text-center py-8"
               >
                 <motion.div
-                  animate={{ y: [0, -8, 0] }}
+                  animate={{ y: [0, -6, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
-                  className="mb-4 flex justify-center"
+                  className="mb-3 flex justify-center"
                 >
-                  <div className="w-16 h-16 rounded-full bg-slate-200 flex items-center justify-center">
-                    <UsersIcon className="w-8 h-8 fill-slate-400" />
+                  <div className="w-10 h-10 rounded-full bg-slate-200 flex items-center justify-center">
+                    <UsersIcon className="w-5 h-5 fill-slate-400" />
                   </div>
                 </motion.div>
-                <p className="text-base font-bold text-slate-700 mb-2">
+                <p className="text-sm font-bold text-slate-700 mb-1">
                   Menunggu Teman...
                 </p>
-                <p className="text-sm text-slate-500 font-medium">
+                <p className="text-xs text-slate-500 font-medium">
                   Bagikan kode room untuk memulai chat
                 </p>
               </motion.div>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-2">
                 {otherBubbles.map((msg, index) => {
                   const userColor = getColorForUser(msg.name);
                   const colorClass = userColor.replace("bg-", "");
@@ -255,28 +215,28 @@ export default function ChatRoom({ username, roomCode }) {
                       initial={{ opacity: 0, x: -20, scale: 0.95 }}
                       animate={{ opacity: 1, x: 0, scale: 1 }}
                       transition={{ duration: 0.3, delay: index * 0.05 }}
-                      className="flex items-start gap-2.5"
+                      className="flex items-start gap-2"
                     >
                       <motion.div
                         whileHover={{ scale: 1.1, rotate: 5 }}
-                        className={`h-8 w-8 rounded-full ${userColor} flex items-center justify-center text-white font-bold text-xs select-none flex-shrink-0`}
+                        className={`h-7 w-7 rounded-full ${userColor} flex items-center justify-center text-white font-bold text-[10px] select-none flex-shrink-0`}
                       >
                         {getInitials(msg.name)}
                       </motion.div>
                       <div className="flex-1 min-w-0">
                         <motion.div
                           whileHover={{ y: -2 }}
-                          className={`bg-white rounded-2xl rounded-tl-sm border-2 border-${colorClass} px-4 py-3`}
+                          className={`bg-white rounded-2xl rounded-tl-sm border-2 border-${colorClass} px-3 py-2`}
                         >
-                          <div className="flex items-center justify-between mb-2">
+                          <div className="flex items-center justify-between mb-1">
                             <p
-                              className={`text-[10px] font-bold text-${colorClass} uppercase tracking-wider flex items-center gap-1.5`}
+                              className={`text-[9px] font-bold text-${colorClass} uppercase tracking-wider flex items-center gap-1.5`}
                             >
                               <span>{msg.name}</span>
                               <motion.span
-                                animate={{ scale: [1, 1.2, 1] }}
+                                animate={{ scale: [0.8, 1.2, 1] }}
                                 transition={{ duration: 2, repeat: Infinity }}
-                                className={`w-1.5 h-1.5 rounded-full bg-${colorClass}`}
+                                className={`w-1 h-1 rounded-full bg-${colorClass}`}
                               />
                             </p>
                             {!msg.text && (
@@ -287,7 +247,7 @@ export default function ChatRoom({ username, roomCode }) {
                                     opacity: [0.4, 1, 0.4],
                                   }}
                                   transition={{ duration: 1, repeat: Infinity }}
-                                  className={`w-1.5 h-1.5 rounded-full bg-${colorClass}`}
+                                  className={`w-1 h-1 rounded-full bg-${colorClass}`}
                                 />
                                 <motion.div
                                   animate={{
@@ -299,7 +259,7 @@ export default function ChatRoom({ username, roomCode }) {
                                     delay: 0.2,
                                     repeat: Infinity,
                                   }}
-                                  className={`w-1.5 h-1.5 rounded-full bg-${colorClass}`}
+                                  className={`w-1 h-1 rounded-full bg-${colorClass}`}
                                 />
                                 <motion.div
                                   animate={{
@@ -311,13 +271,13 @@ export default function ChatRoom({ username, roomCode }) {
                                     delay: 0.4,
                                     repeat: Infinity,
                                   }}
-                                  className={`w-1.5 h-1.5 rounded-full bg-${colorClass}`}
+                                  className={`w-1 h-1 rounded-full bg-${colorClass}`}
                                 />
                               </div>
                             )}
                           </div>
                           {msg.text && (
-                            <p className="text-sm font-medium text-slate-800 leading-relaxed break-words">
+                            <p className="text-xs font-medium text-slate-800 leading-normal break-words">
                               {msg.text}
                             </p>
                           )}
