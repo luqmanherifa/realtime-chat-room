@@ -6,9 +6,9 @@ export default function SelectScreen({ onCreateClick, onJoinClick }) {
         <div className="mb-12 text-center">
           <div className="mb-6 flex justify-center">
             <div className="relative">
-              <div className="absolute -top-2 -right-2 w-16 h-16 bg-purple-100 rounded-full animate-pulse"></div>
+              <div className="absolute -top-2 -right-2 w-16 h-16 bg-purple-200 rounded-full animate-pulse"></div>
               <div
-                className="absolute -bottom-3 -left-3 w-12 h-12 bg-blue-100 rounded-full animate-pulse"
+                className="absolute -bottom-3 -left-3 w-12 h-12 bg-green-200 rounded-full animate-pulse"
                 style={{ animationDelay: "0.5s" }}
               ></div>
 
@@ -24,7 +24,7 @@ export default function SelectScreen({ onCreateClick, onJoinClick }) {
             </div>
           </div>
 
-          <h1 className="text-3xl font-heading tracking-wide text-rumor font-extrabold">
+          <h1 className="text-4xl font-heading tracking-wide text-rumor font-extrabold">
             Rumorum
           </h1>
           <p className="mt-2 text-sm text-gray-400 font-medium">

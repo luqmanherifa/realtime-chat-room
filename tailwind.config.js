@@ -9,8 +9,8 @@ export default {
         echo: "#43C000",
       },
       fontFamily: {
-        heading: ["'Dela Gothic One'", "cursive"],
-        body: ["'Happy Monkey'", "system-ui", "sans-serif"],
+        heading: ["'Fredoka'", "cursive"],
+        body: ["'Quicksand'", "system-ui", "sans-serif"],
       },
     },
   },
