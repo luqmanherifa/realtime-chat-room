@@ -74,7 +74,7 @@ export default function ChatRoom({ username, roomCode }) {
           animate={{ y: 0, opacity: 1 }}
           className="relative bg-white border-b-2 border-slate-200 overflow-hidden"
         >
-          <div className="relative px-4 py-2 pt-12">
+          <div className="relative px-4 py-2">
             <div className="flex items-center gap-2.5">
               <motion.div
                 animate={{
