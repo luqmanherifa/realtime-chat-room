@@ -71,6 +71,21 @@ export default function SelectScreen({ onCreateClick, onJoinClick }) {
           </button>
         </div>
       </div>
+
+      {/* Footer */}
+      <div className="w-full pb-6 text-center">
+        <p className="text-xs text-gray-400">
+          © 2026{" "}
+          <a
+            href="https://github.com/luqmanherifa"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-rumor hover:underline transition-all"
+          >
+            Luqman Herifa
+          </a>
+        </p>
+      </div>
     </main>
   );
 }
