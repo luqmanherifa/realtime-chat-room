@@ -74,62 +74,55 @@ export default function ChatRoom({ username, roomCode }) {
           animate={{ y: 0, opacity: 1 }}
           className="bg-white border-b-2 border-slate-200"
         >
-          <div className="px-5 py-4">
-            <div className="flex items-center justify-between mb-3">
-              <div className="flex items-center gap-2">
+          <div className="px-4 py-3">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-2 flex-1 min-w-0">
                 <motion.div
                   animate={{ rotate: [0, 5, -5, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
+                  className="flex-shrink-0"
                 >
-                  <RumorumLogoIcon className="w-8 h-8 fill-rumor" />
+                  <RumorumLogoIcon className="w-7 h-7 fill-rumor" />
                 </motion.div>
-                <div>
-                  <h1 className="text-lg font-bold text-slate-800 leading-tight">
+                <div className="flex-1 min-w-0">
+                  <h1 className="text-base font-bold text-slate-800 leading-tight truncate">
                     {roomInfo?.name || "..."}
                   </h1>
-                  <div className="flex items-center gap-1 text-xs text-slate-500 font-medium">
-                    <PeopleIcon className="w-3 h-3 fill-slate-500" />
+                  <div className="flex items-center gap-1.5 text-[10px] text-slate-500 font-medium">
+                    <PeopleIcon className="w-2.5 h-2.5 fill-slate-500" />
                     <span>{otherBubbles.length + 1} orang</span>
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
-                <div className="text-right">
-                  <p className="text-[10px] text-slate-500 uppercase tracking-wide font-bold">
-                    Anda
-                  </p>
-                  <p className="text-xs font-bold text-slate-800">{username}</p>
-                </div>
-                <div
-                  className={`h-10 w-10 rounded-full ${getColorForUser(
-                    username
-                  )} flex items-center justify-center text-white font-bold text-base select-none`}
-                >
-                  {getInitials(username)}
-                </div>
+              <div
+                className={`h-8 w-8 rounded-full ${getColorForUser(
+                  username
+                )} flex items-center justify-center text-white font-bold text-xs select-none flex-shrink-0`}
+              >
+                {getInitials(username)}
               </div>
             </div>
 
-            <div className="bg-white border-2 border-slate-200 rounded-xl px-3 py-2 flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-slate-600 font-semibold">
-                  Kode Room
+            <div className="bg-slate-50 border border-slate-200 rounded-lg px-2.5 py-1.5 flex items-center justify-between">
+              <div className="flex items-center gap-2 flex-1 min-w-0">
+                <span className="text-[10px] text-slate-500 font-semibold">
+                  Kode
                 </span>
-                <span className="text-sm font-bold text-slate-800 tracking-wider">
+                <span className="text-xs font-bold text-slate-800 tracking-wider">
                   {roomCode}
                 </span>
               </div>
               <motion.button
                 whileTap={{ scale: 0.9 }}
                 onClick={handleCopyCode}
-                className="p-1.5 hover:bg-slate-100 rounded-lg transition-colors"
+                className="p-1 hover:bg-slate-200/60 rounded-md transition-colors flex-shrink-0"
                 title="Salin kode"
               >
                 {copied ? (
-                  <CheckIcon className="w-4 h-4 fill-green-600" />
+                  <CheckIcon className="w-3.5 h-3.5 fill-green-600" />
                 ) : (
-                  <CopyIcon className="w-4 h-4 fill-slate-500" />
+                  <CopyIcon className="w-3.5 h-3.5 fill-slate-500" />
                 )}
               </motion.button>
             </div>
@@ -144,7 +137,7 @@ export default function ChatRoom({ username, roomCode }) {
             animate={{ scale: 1, opacity: 1 }}
             className="sticky top-0 z-10"
           >
-            <div className="bg-white rounded-xl border-2 border-whisper/30 p-2.5 shadow-sm">
+            <div className="bg-white rounded-xl border-2 border-whisper/30 p-2.5">
               <div className="flex items-center justify-between mb-1.5">
                 <div className="flex items-center gap-1.5 flex-1 min-w-0">
                   <div
