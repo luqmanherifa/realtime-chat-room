@@ -4,9 +4,9 @@ export default {
   theme: {
     extend: {
       colors: {
-        rumor: "#5F6F8C",
-        whisper: "#C04BFF",
-        echo: "#43C000",
+        rumor: "#C04BFF",
+        whisper: "#43C000",
+        echo: "#FF4F9A",
       },
       fontFamily: {
         heading: ["'Fredoka'", "cursive"],
