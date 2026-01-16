@@ -39,7 +39,7 @@ export default function CreateRoomScreen({
           transition={{ duration: 0.4, delay: 0.1 }}
           className="mb-8"
         >
-          <h1 className="text-2xl font-bold text-slate-800 mb-2">
+          <h1 className="text-xl font-bold text-slate-800 mb-2">
             Buat Room Baru
           </h1>
           <p className="text-sm text-slate-500 font-medium">
