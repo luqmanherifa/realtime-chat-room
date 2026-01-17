@@ -13,7 +13,7 @@ import {
 export default function ChatRoom({ username, roomCode }) {
   const { roomInfo, allMessages, myMessage, updateMyMessage } = useChatRoom(
     username,
-    roomCode
+    roomCode,
   );
   const myBubble = allMessages.find((m) => m.name === username);
   const otherBubbles = allMessages.filter((m) => m.name !== username);
@@ -121,12 +121,12 @@ export default function ChatRoom({ username, roomCode }) {
             animate={{ scale: 1, opacity: 1 }}
             className="sticky top-0 z-10"
           >
-            <div className="bg-white rounded-xl border border-whisper p-2.5 pb-1">
+            <div className="bg-white rounded-tr-none rounded-xl border border-whisper p-2.5 pb-1.5">
               <div className="flex items-center justify-between mb-2">
                 <div className="flex items-center gap-1.5 flex-1 min-w-0">
                   <div
                     className={`h-4 w-4 rounded-full ${getColorForUser(
-                      username
+                      username,
                     )} flex items-center justify-center text-white font-bold text-[9px] select-none flex-shrink-0`}
                   >
                     {getInitials(username)}
@@ -234,7 +234,7 @@ export default function ChatRoom({ username, roomCode }) {
                       <div className="flex-1 min-w-0">
                         <motion.div
                           whileHover={{ y: -2 }}
-                          className={`bg-white rounded-2xl rounded-tl-sm border-2 border-${colorClass} px-3 py-2`}
+                          className={`bg-white rounded-2xl rounded-tl-none border-2 border-${colorClass} px-3 py-2`}
                         >
                           <div className="flex items-center justify-between mb-1">
                             <p
