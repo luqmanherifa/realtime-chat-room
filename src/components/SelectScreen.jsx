@@ -125,7 +125,7 @@ export default function SelectScreen({ onCreateClick, onJoinClick }) {
         className="w-full pb-6 text-center"
       >
         <p className="text-xs text-slate-400 font-medium">
-          © 2026{" "}
+          © {new Date().getFullYear()}{" "}
           <a
             href="https://github.com/luqmanherifa"
             target="_blank"
